@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 /**
     Circle's total area percent in the whole vector drawing
  */
-public class CircleAreaPercent implements IVtFeature {
+public class CircleAreaPercentFeature implements IVtFeature {
     @Override
     public BigDecimal calc(VectorDrawing vectorDrawing) {
         BigDecimal totalCircleArea = BigDecimal.valueOf(0);

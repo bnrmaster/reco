@@ -1,7 +1,6 @@
 package com.dz.cloud.algorithm;
 
-import com.dz.cloud.algorithm.impl.CircleAreaPercent;
-import com.dz.cloud.algorithm.impl.InterPointCountFeature;
+import com.dz.cloud.algorithm.impl.*;
 import com.dz.cloud.algorithm.intf.IVtFeature;
 import com.dz.cloud.model.VectorDrawing;
 
@@ -13,7 +12,13 @@ public class VtFeatureAnalysis {
     private static List<IVtFeature> IVtFeatures = new ArrayList<>();
     static {
         IVtFeatures.add(new InterPointCountFeature());
-        IVtFeatures.add(new CircleAreaPercent());
+        IVtFeatures.add(new CircleAreaPercentFeature());
+        IVtFeatures.add(new EllipseAreaPercentFeature());
+        IVtFeatures.add(new CircleCountFeature());
+        IVtFeatures.add(new ElemCountFeature());
+        IVtFeatures.add(new EllipseCountFeature());
+        IVtFeatures.add(new LineCountFeature());
+        IVtFeatures.add(new RectCountFeature());
     }
     public static List<BigDecimal> analyse(VectorDrawing vectorDrawing) {
         List<BigDecimal> result = new ArrayList<>();

@@ -2,6 +2,7 @@ package com.dz.cloud.geolib;
 
 import lombok.Data;
 import org.locationtech.jts.geom.Coordinate;
+import org.locationtech.jts.geom.Geometry;
 import org.locationtech.jts.geom.Polygon;
 import org.locationtech.jts.util.GeometricShapeFactory;
 
@@ -20,11 +21,12 @@ public class Rect extends Shape {
     Double height;
 
     @Override
-    public Polygon getPolygon() {
+    public Geometry getGeometry() {
         GeometricShapeFactory factory = new GeometricShapeFactory();
         factory.setCentre(new Coordinate(x + width / 2, y + height / 2));
         factory.setWidth(width);
         factory.setHeight(height);
+        factory.setNumPoints(4);
         Polygon polygon =factory.createRectangle();
         return polygon;
     }

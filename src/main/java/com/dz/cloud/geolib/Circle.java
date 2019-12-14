@@ -2,6 +2,7 @@ package com.dz.cloud.geolib;
 
 import lombok.Data;
 import org.locationtech.jts.geom.Coordinate;
+import org.locationtech.jts.geom.Geometry;
 import org.locationtech.jts.geom.Polygon;
 import org.locationtech.jts.util.GeometricShapeFactory;
 
@@ -19,7 +20,7 @@ public class Circle extends Shape {
     Double r;
 
     @Override
-    public Polygon getPolygon() {
+    public Geometry getGeometry() {
         GeometricShapeFactory factory = new GeometricShapeFactory();
         factory.setCentre(new Coordinate(cx, cy));
         factory.setSize(r*2);

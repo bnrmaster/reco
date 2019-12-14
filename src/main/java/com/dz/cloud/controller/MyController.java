@@ -2,7 +2,7 @@ package com.dz.cloud.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.dz.cloud.geolib.parser.SVGParser;
-import com.dz.cloud.model.SVG;
+import com.dz.cloud.model.VectorDrawing;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,12 +21,12 @@ public class MyController {
         //2.创建DocumentBuilder对象
         try {
             DocumentBuilder builder = factory.newDocumentBuilder();
-            Document d = builder.parse("/Users/wangdz/Downloads/method-draw-image.svg");
-            SVG svg = new SVGParser().parse(d);
-            System.out.println(JSON.toJSON(svg.getCircles()));
-            System.out.println(JSON.toJSON(svg.getEllipses()));
-            System.out.println(JSON.toJSON(svg.getLines()));
-            System.out.println(JSON.toJSON(svg.getRects()));
+            Document d = builder.parse("/Users/wangdz/Downloads/method-draw-image.vectorDrawing");
+            VectorDrawing vectorDrawing = new SVGParser().parse(d);
+            System.out.println(JSON.toJSON(vectorDrawing.getCircles()));
+            System.out.println(JSON.toJSON(vectorDrawing.getEllipses()));
+            System.out.println(JSON.toJSON(vectorDrawing.getLines()));
+            System.out.println(JSON.toJSON(vectorDrawing.getRects()));
 
         } catch (Exception e) {
             e.printStackTrace();

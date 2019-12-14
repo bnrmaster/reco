@@ -1,7 +1,7 @@
 package com.dz.cloud.geolib.parser;
 
 import com.dz.cloud.geolib.Shape;
-import com.dz.cloud.model.SVG;
+import com.dz.cloud.model.VectorDrawing;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -21,13 +21,13 @@ public class SVGParser {
     }
 
 
-    public static SVG parse(Document doc) {
-        List<List> packer = new ArrayList<>();
+    public static VectorDrawing parse(Document doc) {
+        List<List<Shape>> packer = new ArrayList<>();
         packer.add(parseNodes(doc,"rect"));
         packer.add(parseNodes(doc,"line"));
         packer.add(parseNodes(doc,"circle"));
         packer.add(parseNodes(doc,"ellipse"));
-        return new SVG(packer);
+        return new VectorDrawing(packer);
     }
 
     private static List<Shape> parseNodes(Document doc, String nodeName) {

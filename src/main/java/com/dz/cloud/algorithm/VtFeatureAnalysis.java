@@ -19,6 +19,8 @@ public class VtFeatureAnalysis {
         IVtFeatures.add(new EllipseCountFeature());
         IVtFeatures.add(new LineCountFeature());
         IVtFeatures.add(new RectCountFeature());
+        IVtFeatures.add(new RightAngleNumFeature());
+        IVtFeatures.add(new AngleSumLLFeature());
     }
     public static List<BigDecimal> analyse(VectorDrawing vectorDrawing) {
         List<BigDecimal> result = new ArrayList<>();

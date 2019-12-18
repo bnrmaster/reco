@@ -1,0 +1,96 @@
+<html>
+<style>
+</style>
+<body style="width:100%">
+ <div id="main" style="width:100%">
+ 
+ </div>
+ <button onclick="draw()">draw</button>
+ <div id="weights" style = "width:100%"></div>
+</body>
+</html>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script>
+initWeights();
+
+function initWeights() {
+  var weightData = $.ajax({url:"/getWeight",async:false}).responseText;
+  weightData = JSON.parse(weightData);
+  var weightsParentDiv = document.getElementById("weights");
+  for (var i = 0; i < weightData.length; i++) {
+    var weightDiv = document.createElement('div');
+    weightDiv.style.width = "50px";
+    weightDiv.style.float = "left";
+    var input = document.createElement('input');
+    input.type = "number";
+    input.value = weightData[i].weight;
+    input.className = "weightNums";
+    input.style.width="100%";
+    input.onchange = window.setWeight;
+    var span = document.createElement('span');
+    span.innerText = weightData[i].name;
+    weightDiv.appendChild(input);
+    weightDiv.appendChild(span);
+    weightsParentDiv.appendChild(weightDiv);
+  }
+}
+
+function setWeight() {
+  var weightNums = document.getElementsByClassName('weightNums');
+  var nums = [];
+  for (var  i = 0; i < weightNums.length; i++) {
+      nums.push(parseFloat(weightNums[i].value));
+  }
+  $.ajax({
+    url:"/setWeight",
+    type: "POST",
+    contentType: "application/json;charset=utf-8",
+    dataType: "json",
+    data:JSON.stringify(nums),
+    async:false});
+  draw();
+}
+
+function draw() {
+  var main = document.getElementById("main");
+  var elements = document.getElementsByClassName('bucket');
+  for(var i = elements.length - 1; i >= 0; i--) { 
+    elements[i].parentNode.removeChild(elements[i]);
+  }
+
+
+
+
+  var todraw = $.ajax({url:"/getRecogResult",async:false}).responseText;
+  todraw = JSON.parse(todraw);
+  for(var bucketFile in todraw){
+    var bucket = document.createElement('div');
+    bucket.style.width = "100px";
+    bucket.style.float = "left";
+    bucket.style.border = "1px solid blue";
+    bucket.className = "bucket";
+    var img = document.createElement("img");
+    img.style.border="1px solid red";
+    img.src = bucketFile;
+    img.style.width="80%";
+    img.style.margin = "5px";
+    bucket.appendChild(img);
+    for (var i = 0; i < todraw[bucketFile].length; i++) {
+      var img = document.createElement("img");
+      img.style.border="1px solid red";
+      img.src = todraw[bucketFile][i];
+      img.style.width="80%";
+      img.style.margin = "5px";
+      var span = document.createElement("span");
+      var name = todraw[bucketFile][i].split("/");
+      span.innerText = name[name.length - 1];
+      span.style.fontSize = "5px";
+      bucket.appendChild(img);
+      bucket.appendChild(span);
+    }
+    main.append(bucket);
+  }
+ 
+
+}
+</script>

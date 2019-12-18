@@ -27,7 +27,9 @@ public class SVGParser {
         packer.add(parseNodes(doc,"line"));
         packer.add(parseNodes(doc,"circle"));
         packer.add(parseNodes(doc,"ellipse"));
-        return new VectorDrawing(packer);
+        VectorDrawing vtDraw = new VectorDrawing(packer);
+        vtDraw.setFilePath(doc.getDocumentURI());
+        return vtDraw;
     }
 
     private static List<Shape> parseNodes(Document doc, String nodeName) {
